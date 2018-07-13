@@ -30,7 +30,7 @@
                 "by" => "",
                 "comment" => array
                 (
-                    "en" => ""
+                    "en" => "en-comment"
                 )
             ),
             "symbol" => array
@@ -42,8 +42,6 @@
                 (
                     "en" => ""
                 )
-
-
             )
         );
 
