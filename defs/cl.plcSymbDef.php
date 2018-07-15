@@ -39,7 +39,7 @@
             $this->_addNewAttr($k,$this->getNodeSchema($k));
         }
 
-        public function jsonEncode( string $AttrNode, int $encodeLevel=2)
+        public function jsonEncode1( string $AttrNode, int $encodeLevel=2)
         {
             $je = json_encode(array()); //initialize with default empty array
             foreach( $this->Attr as $Node => $Arr )
@@ -50,6 +50,18 @@
                 }
             }
 
+            //encoding required?
+            for($i=0;$i<$encodeLevel;$i++)
+            {
+                $je = base64_encode($je);
+            }
+            return ($je);
+        }
+
+        public function jsonEncode( int $encodeLevel=2)
+        {
+            $je = json_encode($this->Attr);
+  
             //encoding required?
             for($i=0;$i<$encodeLevel;$i++)
             {

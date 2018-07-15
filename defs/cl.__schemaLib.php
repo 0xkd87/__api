@@ -17,10 +17,12 @@
         private 
         $schemaLib = array
         (
-            "metaData" => array 
+            "ident" => array 
             (
-                "guid" => "deadbeef",
-                "lang" => "en"
+                "_uid" => "deadbeef",
+                "lang" => "en",
+                "objType" => "", //Tag,FB,UDT,AlarmList....
+                "hasChildern" => false
             ),
             "rev" => array 
             (
@@ -30,19 +32,47 @@
                 "by" => "",
                 "comment" => array
                 (
-                    "en" => "en-comment"
+                    "en" => "en-comment."
                 )
             ),
-            "symbol" => array
+            "plcTag" => array //basic plc tag object (Tag = Symbol, FB, FC, UDT, DB, I/O...)
             (
                 "isF" => false,
                 "name" => "",
                 "datatype" => "BOOL",
+                "address" => "",
                 "comment" => array
                 (
                     "en" => ""
                 )
+            ),
+
+            "project" => array
+            (
+                "status" => "",
+                "team" => array
+                (
+
+                ),
+                "name" => "",
+                "num" => "",
+
+                "created" => array //set when object is created - and locked
+                (
+                    "on" => "",
+                    "by" => ""
+                ),
+                "customer" => array
+                (
+                    "name" => "",
+                    "address" => "",
+                    "email" => array(),
+                    "tel" => array()
+                )
+
+
             )
+
         );
 
         /*
