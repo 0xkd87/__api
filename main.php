@@ -6,7 +6,7 @@
 <?php
     include_once('./cl.dbDriver.php');
 
-    include_once('./defs/e.php');
+    include_once('./defs/cl.UDT.php');
 ?>
 
 
@@ -15,15 +15,9 @@
 
     $db = new dbDriver('./../_dbTmp','a','.db');
     $db1 = new dbDriver('./../_dbTmp','b','.dbb');
-    $t1 = new e();
-    $t2 = new e();
-
-//    $t2->_addNewAttr('newattr', 'rrr');
-//    $s = $t2->serializeAttr();
-//    $t1->setAttr($s);
- //   echo $t1->serializeAttr();
- //   echo $s;
+    $t1 = new UDT();
+    $t2 = new UDT();
     
 
-    echo   $t1->jsonEncode('rev',0);
+    echo   $t1->jsonEncodeAttr(0);
 ?>

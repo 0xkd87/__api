@@ -1,25 +1,23 @@
 <?php
-   //Abstract definition of any PLC symbol
+   include_once('interface.constants.php');
 ?>
 
 <?php
 
 
-
-    //definition - strucure
-
-    //searchhints
-
  abstract   
- class __schemaLib 
+ class __schemaLib implements CONST_OBJTYPE
     {
+
+
         //basic object info
         private 
         $schemaLib = array
         (
             "ident" => array 
             (
-                "_uid" => "deadbeef",
+                "_uid" => "deadbeef", //unique object id - assigned at the time of construct
+                "idx" => -1, // the index (Auto assigned by DB) which is used to call this element from the App
                 "lang" => "en",
                 "objType" => "", //Tag,FB,UDT,AlarmList....
                 "hasChildern" => false
@@ -45,6 +43,44 @@
                 (
                     "en" => ""
                 )
+            ),
+
+
+            "varUDT" => array
+            (
+                "rowIdx" => 0,
+                "isDiagEv" => false // is this UDT variable contains additional Diag Event (AWM) info?
+            ),
+
+            "diagEv" => array //= Diagnostic Event
+            (
+                "evCat" => "", //diagnosis category (alarm/Warning/Message)
+                "evHelp" => array
+                (   
+                    "lang" => "en",
+
+                    "desc" => array
+                    (
+                        "idx" => -1,
+                        "text" => ""
+                    ),
+                    "cause" => array
+                    (
+                        "idx" => -1,
+                        "text" => ""
+                    ),
+                    "check" => array
+                    (
+                        "idx" => -1,
+                        "text" => ""
+                    ),
+                    "reset" => array
+                    (
+                        "idx" => -1,
+                        "text" => ""
+                    )
+                )
+
             ),
 
             "project" => array
