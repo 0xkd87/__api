@@ -62,8 +62,13 @@ class dbDriver
         }
         return -1;
     }
-    private function _dbDisconnect()
+    public 
+    function _dbDisconnect()
     {
+        if($this->_db)
+        {
+            $this->_db->close();
+        }
 
     }
 
@@ -72,6 +77,14 @@ class dbDriver
         if($this->_db)
         {
             $this->_db->exec($qStatement);
+        }
+    }
+
+    public function dbQuery(string $qStatement)
+    {
+        if($this->_db)
+        {
+           return($this->_db->query($qStatement));
         }
     }
 
