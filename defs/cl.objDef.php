@@ -5,7 +5,8 @@
 <?php
    class objDef extends __schemaLib
    {
-        private $_Attr = array();  //this holds all the info (static declaration here| Althogh runtime creation will also be possible)
+        public 
+        $_Attr = array();  //this holds all the info (static declaration here| Althogh runtime creation will also be possible)
         private $_guid = "";
 
         protected
@@ -83,6 +84,13 @@
                 $je = base64_encode($je);
             }
             return ($je);
+        }
+
+        public 
+        function jsonDecodeAttr($encodedString, int $encodeLevel=0)
+        {
+
+            $this->_Attr = json_decode($encodedString,true);
         }
 
 

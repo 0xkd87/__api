@@ -12,12 +12,28 @@
 
 <?php
 
+    $tbl = "x";
+
 
     $db = new dbDriver('./../_dbTmp','a','.db');
-    $db1 = new dbDriver('./../_dbTmp','b','.dbb');
+    $db->dbExQuery("CREATE TABLE IF NOT EXISTS $tbl 
+    (
+        udt STRING PRIMARY KEY NOT NULL
+    )");
+
+    $postdata = file_get_contents("php://input");
     $t1 = new UDT();
-    $t2 = new UDT();
+    $t1->jsonDecodeAttr($postdata);
+
+    //echo $t1->_Attr['plcTag']['name'];
+    $ser = $t1->serializeAttr();
+    //var_dump($ser);
+    $db->dbExQuery("INSERT INTO '$tbl' (udt) VALUES ('$ser')");
+        
+    echo   $t1->jsonEncodeAttr(0);
+
+    //$t1 = new UDT();
     
 
-    echo   $t1->jsonEncodeAttr(0);
+   //echo   $t1->jsonEncodeAttr(0);
 ?>

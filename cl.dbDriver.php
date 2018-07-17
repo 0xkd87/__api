@@ -67,9 +67,12 @@ class dbDriver
 
     }
 
-    private function _dbExQuery()
+    public function dbExQuery(string $qStatement)
     {
-
+        if($this->_db)
+        {
+            $this->_db->exec($qStatement);
+        }
     }
 
 }
