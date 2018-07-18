@@ -89,8 +89,13 @@
         public 
         function jsonDecodeAttr($encodedString, int $encodeLevel=0)
         {
-
-            $this->_Attr = json_decode($encodedString,true);
+            $rxAttr = json_decode($encodedString,true); //fetch all the attributes from JSON stream
+            //assign only the attributes which are received from Json; keeping the sensitive info as read only by the front end
+            foreach( $rxAttr as $k => $v )
+            {
+              if( is_array( $v ) ) 
+              $this->_Attr[ $k ] = $v;
+            }
         }
 
 

@@ -15,5 +15,4 @@ interface CONST_OBJTYPE
 <?php
 
 
-
 ?>

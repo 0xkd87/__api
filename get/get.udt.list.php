@@ -7,20 +7,21 @@
     include_once('./../defs/cl.UDT.php');
 
     $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
+
+    include_once('./../drivers/drv.libUDT.php');
 ?>
 
 
 <?php
 
 MakeDir($DirPath_ROOT_LibUDT);
-$tbl = "x";
+/* $tbl = "x";
 
 
 $db = new dbDriver($DirPath_ROOT_LibUDT,'LibUDT','.db');
 //var_dump($db);
 $row = array();
 $results = $db->dbQuery("SELECT * FROM '$tbl' ");
-
 
 
 while($r = $results->fetchArray())
@@ -32,7 +33,10 @@ while($r = $results->fetchArray())
     $jEnc = json_encode($row);
     echo $jEnc;
 
-    $db->_dbDisconnect();
+    $db->_dbDisconnect(); */
+    $drv = new drvLibUDT();
+    echo $drv->getUDTList();
+
     exit;
 
 
