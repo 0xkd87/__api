@@ -88,5 +88,22 @@ class dbDriver
         }
     }
 
+    /*
+    creates/initialized tables in the db
+    */
+    public
+    function initTables(string $table, array $fieldArr)
+    {
+
+/*         CREATE TABLE `tablename` (
+            `idx`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+            `Field2`	INTEGER UNIQUE
+        ); */
+        if($table !== '')
+        {
+            $qStatement = "CREATE TABLE IF NOT EXISTS " . $table;
+        }
+    }
+
 }
 ?>
