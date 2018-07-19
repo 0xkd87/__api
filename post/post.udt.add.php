@@ -7,11 +7,13 @@
     include_once('./../defs/cl.UDT.php');
 
     $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
+    include_once('./../drivers/drv.libUDT.php');
+
 ?>
 
 
 <?php
-    MakeDir($DirPath_ROOT_LibUDT);
+/*     MakeDir($DirPath_ROOT_LibUDT);
     $tbl = "x";
 
 
@@ -34,7 +36,9 @@
 
         //if query success
         echo $t1->jsonEncodeAttr(0);
-    }
+    } */
 
+    $drv = new drvLibUDT();
+    echo $drv->addNewUDT();
     exit;
 ?>

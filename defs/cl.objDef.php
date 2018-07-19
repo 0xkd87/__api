@@ -25,6 +25,13 @@
         {
             $this->_Attr['ident']['objType'] = $ot;
         }
+
+        /* Sets the Object ID which is auto assigned */
+        public
+        function setAttr_RowIdx(int $_rowid_)
+        {
+            $this->_Attr['ident']['idx'] = $_rowid_;
+        }
         private 
         function _newGUID($txt , $len = 40)
         {
@@ -42,6 +49,18 @@
         function _addNewAttrFromSchema($k)
         {
             $this->_addNewAttr($k,$this->getNodeSchema($k));
+        }
+
+        //gets all Attr Node names as array
+        public
+        function getAttrNodeNamesAsArray()
+        {
+            $a = []; //init
+            foreach( $this->_Attr as $NodeName => $ValArr )
+            {
+                $a[$NodeName] =  $NodeName; //add all the 1st level nodes
+            }
+            return $a;
         }
 
 
@@ -111,10 +130,27 @@
         }
 
         public 
-        function setAttr(string $serializedString)
+        function serializeAttrNode($AttrNode = "")
         {
+            if($AttrNode !== "")
+            {
+                return serialize($this->_Attr[$AttrNode]);
+            }
+            return serialize($this->_Attr);
+        }
+
+        public 
+        function unserializeToAttrNode(string $serializedString,$AttrNode = "")
+        {
+
             if($serializedString)
             {
+                if($AttrNode !== "")
+                {
+                    $this->_Attr[$AttrNode] = unserialize($serializedString);
+                    return true; //get out
+                }
+                else
                 $this->_Attr = unserialize($serializedString);
             }
         }

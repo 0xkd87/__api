@@ -6,7 +6,8 @@
 class dbDriver
 {
 
-    public $_dbParam = array
+    private
+    $_dbParam = array
     (
         "dbName" => "", //name of the db (file)
         "dbFileExt" => ".db", //custom file extension, if applicable
@@ -37,7 +38,23 @@ class dbDriver
         }
     }
 
-    private function _dbConnect($dbParam = []) : int
+    function __destruct()
+    {
+        //$this->_dbVacuum();
+        /* Close the DB connection on desctruction of the object : good practice..! */
+        if($this->_db)
+        {
+            $this->_db->close();
+        }
+    }
+
+    private function _dbVacuum()
+    {
+        $this->dbExQuery("VACUUM");
+    }
+
+    private 
+    function _dbConnect($dbParam = []) : int
     {
         $f = 0;
         if($dbParam["flags"] ["createNew"])
@@ -62,15 +79,6 @@ class dbDriver
         }
         return -1;
     }
-    public 
-    function _dbDisconnect()
-    {
-        if($this->_db)
-        {
-            $this->_db->close();
-        }
-
-    }
 
     public function dbExQuery(string $qStatement)
     {
@@ -80,11 +88,11 @@ class dbDriver
         }
     }
 
-    public function dbQuery(string $qStatement)
+    public function dbQuery(string $query)
     {
         if($this->_db)
         {
-           return($this->_db->query($qStatement));
+           return($this->_db->query($query));
         }
     }
 
@@ -92,18 +100,14 @@ class dbDriver
     creates/initialized tables in the db
     */
     public
-    function initTables(string $table, array $fieldArr)
+    function initTable(string $sqlStr)
     {
-
-/*         CREATE TABLE `tablename` (
-            `idx`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-            `Field2`	INTEGER UNIQUE
-        ); */
-        if($table !== '')
+        if($sqlStr !== '')
         {
-            $qStatement = "CREATE TABLE IF NOT EXISTS " . $table;
+            $this->dbExQuery($sqlStr);
         }
     }
+
 
 }
 ?>
