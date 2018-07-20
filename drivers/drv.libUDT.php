@@ -37,8 +37,6 @@
                 $x->addField( $v,$x::FIELDTYPE_SERIALIZED_OBJ);
             }
 
-            //var_dump($x);
-
             $this->_dbDrv->initTable($x->getSqlString($x::OP_CREATE));
             
 
@@ -104,7 +102,7 @@
                 $newUDT = new UDT(); //init a new OBJ
                 $newUDT->jsonDecodeAttr($postdata);
             
-                $newUDT->_Attr['plcTag']['name'] = GenerateRandomString();
+                $newUDT->_Attr['plcTag']['name'] = GenerateRandomString(40);
                 $ser = array();
 
                 $sqlInsertStr = "INSERT INTO ". self::TABLE_UDT . " (";
@@ -121,15 +119,14 @@
                 
                 foreach ($ser as $k => $v) 
                 {                     
-                    $sqlInsertStr.= "'".$v."'";
+                    $sqlInsertStr.= "'".$v."'"; //=> Important: surround by the single quotes..!
                     if(next($ser))
                     {
                         $sqlInsertStr.= ", "; // add "," if it's not the last element
                     }
                 }
                 $sqlInsertStr.= ");";
-                //var_dump($sqlInsertStr);
-                //$ser = $newUDT->serializeAttrNode("plcTag");
+
                 if($this->isInitialized())
                 {
                     $this->_dbDrv->dbExQuery($sqlInsertStr);
@@ -139,30 +136,6 @@
                 return $newUDT->jsonEncodeAttr(0);
             }
 
-/*             MakeDir($DirPath_ROOT_LibUDT);
-            $tbl = "x";
-        
-        
-            $db = new dbDriver($DirPath_ROOT_LibUDT,'LibUDT','.db');
-            $db->dbExQuery("CREATE TABLE IF NOT EXISTS $tbl 
-            (
-                udt STRING NOT NULL
-            )");
-        
-            $postdata = file_get_contents("php://input");
-            if($postdata)
-            {
-                $t1 = new UDT();
-                $t1->jsonDecodeAttr($postdata);
-            
-                $t1->_Attr['plcTag']['name'] = 'server modified this';
-                $ser = $t1->serializeAttr();
-            
-                $db->dbExQuery("INSERT INTO '$tbl' (udt) VALUES ('$ser')");
-        
-                //if query success
-                echo $t1->jsonEncodeAttr(0);
-            } */
         }
     }
 

@@ -15,28 +15,10 @@
 <?php
 
 MakeDir($DirPath_ROOT_LibUDT);
-/* $tbl = "x";
 
-
-$db = new dbDriver($DirPath_ROOT_LibUDT,'LibUDT','.db');
-//var_dump($db);
-$row = array();
-$results = $db->dbQuery("SELECT * FROM '$tbl' ");
-
-
-while($r = $results->fetchArray())
-{
-    $c = new UDT();
-    $c->setAttr($r['udt']);
-    $row[] =  $c->jsonEncodeAttr(0);
-}
-    $jEnc = json_encode($row);
-    echo $jEnc;
-
-    $db->_dbDisconnect(); */
     $drv = new drvLibUDT();
     echo $drv->getUDTList();
-
+    echo "xx";
     exit;
 
 
