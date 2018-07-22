@@ -102,7 +102,7 @@
                 $newUDT = new UDT(); //init a new OBJ
                 $newUDT->jsonDecodeAttr($postdata);
             
-                $newUDT->_Attr['plcTag']['name'] = GenerateRandomString(40);
+                $newUDT->_Attr['plcTag']['name'] = GenerateRandomString(8);
                 $ser = array();
 
                 $sqlInsertStr = "INSERT INTO ". self::TABLE_UDT . " (";

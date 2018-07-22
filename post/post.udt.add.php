@@ -13,32 +13,15 @@
 
 
 <?php
-/*     MakeDir($DirPath_ROOT_LibUDT);
-    $tbl = "x";
 
-
-    $db = new dbDriver($DirPath_ROOT_LibUDT,'LibUDT','.db');
-    $db->dbExQuery("CREATE TABLE IF NOT EXISTS $tbl 
-    (
-        udt STRING NOT NULL
-    )");
-
-    $postdata = file_get_contents("php://input");
-    if($postdata)
-    {
-        $t1 = new UDT();
-        $t1->jsonDecodeAttr($postdata);
-    
-        $t1->_Attr['plcTag']['name'] = 'server modified this';
-        $ser = $t1->serializeAttr();
-    
-        $db->dbExQuery("INSERT INTO '$tbl' (udt) VALUES ('$ser')");
-
-        //if query success
-        echo $t1->jsonEncodeAttr(0);
-    } */
 
     $drv = new drvLibUDT();
-    echo $drv->addNewUDT();
+    if($drv)
+    {
+        echo $drv->addNewUDT();
+    }
+    else{
+        echo "error";
+    }
     exit;
 ?>
