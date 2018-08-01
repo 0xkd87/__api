@@ -47,8 +47,14 @@ class dbDriver
             $this->_db->close();
         }
     }
-
-    private function _dbVacuum()
+/**
+ * Vacuum the DB: Garbage collection
+ * Provide this vacuum method to public. instead of keeping it private and calling on destruction.
+ * API caller may not want to perform garbage collection on each operation. 
+ * it's better to call it on each delete trigger
+ */
+    public
+    function dbGC() //Garbage Collect
     {
         $this->dbExQuery("VACUUM");
     }

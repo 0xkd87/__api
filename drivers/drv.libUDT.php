@@ -180,25 +180,45 @@
                 $sqlInsertStr.= " WHERE ";
                 $sqlInsertStr.= "idx = ";
                 $sqlInsertStr.= $newUDT->getAttr_RowIdx();
-/*                 foreach ($ser as $k => $v) 
-                {                     
-                    $sqlInsertStr.= "'".$v."'"; //=> Important: surround by the single quotes..!
-                    if(next($ser))
-                    {
-                        $sqlInsertStr.= ", "; // add "," if it's not the last element
-                    }
-                } */
                 $sqlInsertStr.= ";";
 
                 if($this->isInitialized())
                 {
                     $this->_dbDrv->dbExQuery($sqlInsertStr);
+                    $this->_dbDrv->dbGC(); /** Garbage collect (Vacuum) */
                 }
         
                 //if query success
                 return $newUDT->jsonEncodeAttr(0);
             }
 
+        }
+
+        public
+        function deleteUDT()
+        {
+            $postdata = file_get_contents("php://input");
+            if($postdata)
+            {
+                $delUDT = new UDT(); //init a new OBJ
+                $delUDT->jsonDecodeAttr($postdata,["plcTag", "ident", "rev"],0); //safe
+                
+                $sqlInsertStr = "DELETE FROM ". self::TABLE_UDT . " ";
+                $sqlInsertStr.= " WHERE ";
+                $sqlInsertStr.= "idx = ";
+                $sqlInsertStr.= $delUDT->getAttr_RowIdx();
+                $sqlInsertStr.= ";";
+
+                if($this->isInitialized())
+                {
+                    $this->_dbDrv->dbExQuery($sqlInsertStr);
+                    $this->_dbDrv->dbGC(); /** Garbage collect (Vacuum) */
+                }
+        
+                /*if query success return the from end with this object:
+                for further message or printing*/
+                return $delUDT->jsonEncodeAttr(0);
+            }
         }
     }
 
