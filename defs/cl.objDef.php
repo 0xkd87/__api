@@ -32,6 +32,14 @@
         {
             $this->_Attr['ident']['idx'] = $_rowid_;
         }
+/**
+ * Returns RowIdx
+ */
+        public
+        function getAttr_RowIdx()
+        {
+            return ($this->_Attr['ident']['idx']);
+        }
         private 
         function _newGUID($txt , $len = 40)
         {
@@ -106,6 +114,20 @@
         }
 
         public 
+        function jsonDecodeAttr($encodedString, array $nodes = [], int $encodeLevel=0)
+        {
+            $rxAttr = json_decode($encodedString,true); //fetch all the attributes from JSON stream
+            //assign only the attributes which are received from Json; keeping the sensitive info as read only by the front end
+            foreach( $rxAttr as $k => $v )
+            {
+              if( is_array( $v ) && (array_search($k,$nodes,false)!== false) ) 
+              $this->_Attr[ $k ] = $v;
+            }
+        }
+        /**
+         * Decode and shallow copy a single node attribute
+         */
+/*         public 
         function jsonDecodeAttr($encodedString, int $encodeLevel=0)
         {
             $rxAttr = json_decode($encodedString,true); //fetch all the attributes from JSON stream
@@ -115,8 +137,7 @@
               if( is_array( $v ) ) 
               $this->_Attr[ $k ] = $v;
             }
-        }
-
+        } */
 
         /*
         SERIALIZATION

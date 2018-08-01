@@ -5,21 +5,23 @@
 
     include_once('./../cl.dbDriver.php');
     include_once('./../defs/cl.UDT.php');
-// 
-    $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
 
+    $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
     include_once('./../drivers/drv.libUDT.php');
+
 ?>
 
 
 <?php
 
-MakeDir($DirPath_ROOT_LibUDT);
 
     $drv = new drvLibUDT();
-    echo $drv->getUDTList();
-    // echo "xx";
+    if($drv)
+    {
+        echo $drv->updateUDT();
+    }
+    else{
+        echo "error";
+    }
     exit;
-
-
 ?>

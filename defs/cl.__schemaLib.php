@@ -18,6 +18,7 @@
             (
                 "_uid" => "deadbeef", //unique object id - assigned at the time of construct
                 "idx" => -1, // the index (Auto assigned by DB) which is used to call this element from the App
+                "innerIdx" => -1, // inner index - some elements are the part of parent table (e.g. UDT variables..)
                 "lang" => "en",
                 "objType" => "", //Tag,FB,UDT,AlarmList....
                 "hasChildern" => false
