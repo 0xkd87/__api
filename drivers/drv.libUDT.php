@@ -115,8 +115,7 @@
             {
                 $newUDT = new UDT(); //init a new OBJ
                 //$newUDT->jsonDecodeAttr($postdata); //safe
-                $newUDT->jsonDecodeAttr($postdata,["plcTag"],0); //safe
-
+                $newUDT->jsonDecodeAttr($postdata,["plcTag", "vars"],0); //safe
             
                 // $newUDT->_Attr['plcTag']['name'] = GenerateRandomString(8);
                 $ser = array();
@@ -161,7 +160,7 @@
             if($postdata)
             {
                 $newUDT = new UDT(); //init a new OBJ
-                $newUDT->jsonDecodeAttr($postdata,["plcTag", "ident", "rev"],0); //safe
+                $newUDT->jsonDecodeAttr($postdata,["plcTag", "ident", "rev", "vars"],0); //safe
                 
                 $ser = array();
 

@@ -1,0 +1,8 @@
+#Following must be in htaccess/httpd.conf file to enable compression.
+# compression is important to spare some bandwidth. upto 90% of the data fetch can be saved due to copression as we use json (text strings) as a post data..!
+/*     <IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/js
+#BrowserMatch ^Mozilla/4 gzip-only-text/html
+#BrowserMatch ^Mozilla/4\.0[678] no-gzip
+#BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule> */
