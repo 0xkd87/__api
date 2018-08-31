@@ -1,45 +1,24 @@
 
 <?php
-//Path includes
 
-// include_once('CommonUtil.php');
-
-// /*Folder Names - in plain text */
-// define("DIRNAME__DATA_ROOT",GenerateSHA1("_Data",8));
-// define("PATH__DATA_ROOT", $_SERVER['DOCUMENT_ROOT'] .DIRECTORY_SEPARATOR. DIRNAME__DATA_ROOT .DIRECTORY_SEPARATOR);
-
-
-// /*LibUDT Databse Directory*/
-// define("DIRNAME__LIBUDT_ROOT",GenerateSHA1("LibUDT",8));
-// /*User created Projects*/
-// define("DIRNAME__PROJECT_ROOT",GenerateSHA1("Projects",8));
-// define("DIRNAME__TEMP",GenerateSHA1("WebTemp",24));
+ include_once('./../defs/interface.constants.php');
 
 
 
-class pathProvider
+
+class pathProvider implements RETURN_CODE
 {
 
   const HASH_LEN = 16;
   const STORAGE_ROOT = 'C:\Program Files (x86)\EasyPHP-Devserver-17\eds-www\\';
   const DIRNAME_DATA = 'data';
-  private 
-  $_dirName = array 
-  (
-    "data" => "data",
-    "lib" => "lib",
-    "lib.udt" => "lib.UDT",
-    "lib.wiki" => "lib.Wiki",
-    "prj" => "Projects",
-    "temp" => "Temp",
-    "upload" => "Upload"
-  );
+
 
   private $_path = 'dumpDir';
 
-  function __construct($path)
+  function __construct($location)
   {
-    $this->_path = $path;
+    $this->_path = $location;
   }
 
   private
@@ -73,28 +52,83 @@ class pathProvider
     // make dir path, if does not exist
     $this->_mkDir($dirPath);
 
+
+    /** 
+     * create sub-dir structure
+     */
+    // $dArr = [];
+
+    // $dArr["f1"] = "F1";
+    // $dArr["f2"] = "F2";
+    // $dArr["f3"] = ["F31","F32"];
+
+    // $this->__mkSubDirStruct($dArr,$dirPath);
+
     return ($dirPath);
   }
 
   private 
-  function _mkDir($FullPathToNewDir)
+  function _mkDir($fullPath)
   {
-    if(!file_exists($FullPathToNewDir))
+    if(!file_exists($fullPath))
     {
-      if(mkdir($FullPathToNewDir,0777,true))
+      if(mkdir($fullPath,0777,true)) // mkdir = system call
       {
-        return 0; /*Successfully Added*/
+        return (self::RETURN_SUCCESS); /*Successfully Added*/
       }
       else
       {
-        return -1;
+        return (self::RETURN_ERROR); // Filed to create this dir
       }
     }
     else
     {
-        return 1;
+        return (self::RETURN_FILE_EXISTS); // existing dir
     }
 
+  }
+
+  private 
+  function __mkSubDirStruct($dirArray,$dirPath)
+  {
+      $created = 0;
+      $failed = 0;
+      
+      foreach ($dirArray as $i=>$dir) 
+      {
+          if(is_array($dir))
+          {
+              $d = $dirPath.DIRECTORY_SEPARATOR.$i;
+              if(!file_exists($d))
+              {
+                  if($this->_mkDir($d) === self::RETURN_SUCCESS)
+                  {
+                      if(file_exists($d))
+                      {
+                          // echo "[+] Dir With sub Dir Created:" . $d. "</br>" ;
+                          $this->__mkSubDirStruct($dir,$d);
+                      }
+                  }
+              }
+          }
+          else
+          {
+              $d = $dirPath.DIRECTORY_SEPARATOR.$dir;
+              if(!file_exists($d))
+              {
+                  if($this->_mkDir($d) === self::RETURN_SUCCESS)
+                  {
+                      if(file_exists($d))
+                      {
+                          // echo "Dir Created:" . $d. "</br>" ;
+                      }
+                  }
+              }
+
+          }
+      }
+
+      
   }
 }
 

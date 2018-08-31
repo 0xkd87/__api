@@ -14,5 +14,15 @@ interface CONST_OBJTYPE
 
 <?php
 
+/** 
+ * Any function or operation result codes
+*/
+    interface RETURN_CODE
+    {
+        CONST RETURN_SUCCESS = 0;
+        CONST RETURN_ERROR = -1; // Generaic error; failed operation
+        CONST RETURN_FILE_EXISTS = 2;
+
+    }
 
 ?>

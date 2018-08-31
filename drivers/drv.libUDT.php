@@ -6,7 +6,7 @@
     include_once('./../cl.dbDriver.php');
     include_once('./../defs/cl.UDT.php');
 
-    include_once('./../defs/service.sqlTable.php');
+    include_once('./../services/service.sqlTable.php');
 
     include_once('./../services/service.pathProvider.php');
     //  $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
