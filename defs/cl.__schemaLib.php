@@ -14,6 +14,7 @@
         private 
         $schemaLib = array
         (
+            // Object Identity: basic element of all classes
             "ident" => array 
             (
                 "_uid" => "deadbeef", //unique object id - assigned at the time of construct
@@ -23,6 +24,8 @@
                 "objType" => "", //Tag,FB,UDT,AlarmList....
                 "hasChildern" => false
             ),
+
+            // Last modified - Revision info of an object (Prog. Block, Project, Table...)
             "rev" => array 
             (
                 "major" => 0,
@@ -84,7 +87,11 @@
 
             ),
 
-            "project" => array
+
+  /*
+    PROJECT INTERFACES
+  */          
+            "prj" => array
             (
                 "status" => "",
                 "team" => array
@@ -99,18 +106,23 @@
                     "on" => "",
                     "by" => ""
                 ),
-                "customer" => array
-                (
-                    "name" => "",
-                    "address" => "",
-                    "email" => array(),
-                    "tel" => array()
-                )
+            ),
 
-
+        // Object: Contact (can be aggregated to User)    
+            "contactInfo" => array
+            (
+                "address" => "", // Address of the contact - optional - string
+                "email" => array(),
+                "tel" => array()
+            ),
+            "personalInfo" => array 
+            (
+                "nameFirst" => "", // Name of the contact; string
+                "nameLast" => "",
+                "designation" => "", // designation of a contact in a company - optional - string
             )
 
-        );
+        ); // </definition> ==============
 
         /*
             create the new attribute node in the attribute tree
@@ -125,7 +137,7 @@
                 if($AttrNode === $Node)
                 {
                     $a = $this->_getNodeAsArray($Arr);
-                    return ($a);  //if foud, get out
+                    return ($a);  //if found, get out
                 }
                 else {
                     //return an empty array

@@ -1,13 +1,15 @@
 <?php
     include('./../defs/httpHeaders.php');
 
-    include_once('./../GlobalDef.php');
+    // include_once('./../GlobalDef.php');
 
     include_once('./../cl.dbDriver.php');
     include_once('./../defs/cl.UDT.php');
 
     include_once('./../defs/service.sqlTable.php');
-    $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
+
+    include_once('./../services/service.pathProvider.php');
+    //  $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
 
     class drvLibUDT
     {
@@ -15,15 +17,17 @@
         const DB_FILE_EXT = ".db";
         const TABLE_UDT = "x";
         const TABLE_UDT_CATEGORY = "cat";
+        private $PATH;
+        // const PATH = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
+        // const PATH = ((new pathProvider("lib/libUDT"))->buildPath());
 
-        const PATH = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
         private $_arrNode = [];
         private  $_dbDrv = null;
         /* Initialize databse driver */
         private
         function _initDB()
         {
-            $this->_dbDrv = new dbDriver(self::PATH,self::DB,self::DB_FILE_EXT);
+            $this->_dbDrv = new dbDriver($this->PATH,self::DB,self::DB_FILE_EXT);
         }
 
         private
@@ -46,6 +50,8 @@
         public
         function __construct()
         {
+            $this->PATH = ((new pathProvider("lib/libUDT"))->buildPath());
+
             $this->_initDB();
             $this->_initTables();
         }

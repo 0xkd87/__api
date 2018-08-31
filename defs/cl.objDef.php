@@ -26,7 +26,7 @@
             $this->_Attr['ident']['objType'] = $ot;
         }
 
-        /* Sets the Object ID which is auto assigned */
+        /* Sets the Object ID which is auto assigned by the SQL DB */
         public
         function setAttr_RowIdx(int $_rowid_)
         {
