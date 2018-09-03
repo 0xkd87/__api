@@ -6,6 +6,7 @@ interface CONST_OBJTYPE
     CONST ABSTRACT = "ABSTRACT";
     CONST UDT = "UDT";
     CONST UDT_VAR = "UDT_VAR";
+    CONST PRJ = "PRJ";
    // private function __construct(){}
 
 };

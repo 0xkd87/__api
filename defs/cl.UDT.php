@@ -5,8 +5,11 @@
     class UDT 
     extends plcTag  //This is a PLC Tag too..!
    {
+       // Member variables after base class's members
         public $vars = array();
 
+
+// Construct
         function __construct()
         {
             parent::__construct(); // call parent constuct first = adds all defualt attribute nodes
