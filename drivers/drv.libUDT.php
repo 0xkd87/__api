@@ -16,7 +16,7 @@
         const DB = "libUDT";
         const DB_FILE_EXT = ".db";
         const TABLE_UDT = "x";
-        const TABLE_UDT_CATEGORY = "cat";
+        const TABLE_UDT_CATEGORY = "categories";
         private $PATH;
         // const PATH = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
         // const PATH = ((new pathProvider("lib/libUDT"))->buildPath());
@@ -121,7 +121,7 @@
             {
                 $newUDT = new UDT(); //init a new OBJ
                 //$newUDT->jsonDecodeAttr($postdata); //safe
-                $newUDT->jsonDecodeAttr($postdata,["plcTag", "vars"],0); //safe
+                $newUDT->jsonDecodeAttr($postdata,["plcTag", "vars", "rev"],0); //safe
             
                 // $newUDT->_Attr['plcTag']['name'] = GenerateRandomString(8);
                 $ser = array();

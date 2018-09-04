@@ -12,7 +12,7 @@
     class drvPrj
     {
         const DB = "projects";
-        const DB_FILE_EXT = ".prjx";
+        const DB_FILE_EXT = ".prjDB";
         const TABLE_ACTIVE_PRJ = "active";
         private $PATH;
 
