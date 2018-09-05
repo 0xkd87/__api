@@ -7,6 +7,9 @@ interface CONST_OBJTYPE
     CONST UDT = "UDT";
     CONST UDT_VAR = "UDT_VAR";
     CONST PRJ = "PRJ";
+
+
+    CONST CATEGORIZER = "CATEGORIZER";
    // private function __construct(){}
 
 };
