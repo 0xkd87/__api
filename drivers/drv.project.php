@@ -117,7 +117,7 @@
             if($postdata)
             {
                 $new = new PRJ(); //init a new OBJ
-                $new->jsonDecodeAttr($postdata,["prj"],0); //safe
+                $new->jsonDecodeAttr($postdata,["prj","rev"],0); //safe
             
                 $ser = array();
 
@@ -171,7 +171,7 @@
                 $sqlInsertStr = "UPDATE ". self::TABLE_ACTIVE_PRJ . " SET ";
                 foreach ($this->_arrNode as $k => $v) 
                 {
-                    $ser[$v] = $newUDT->serializeAttrNode($v);
+                    $ser[$v] = $new->serializeAttrNode($v);
                     $sqlInsertStr.= $k;
                     $sqlInsertStr.= " = ";
                     $sqlInsertStr.= "'".$ser[$v]."'"; //=> Important: surround by the single quotes..!
@@ -182,7 +182,7 @@
                 }
                 $sqlInsertStr.= " WHERE ";
                 $sqlInsertStr.= "idx = ";
-                $sqlInsertStr.= $newUDT->getAttr_RowIdx();
+                $sqlInsertStr.= $new->getAttr_RowIdx();
                 $sqlInsertStr.= ";";
 
                 if($this->isInitialized())
