@@ -108,6 +108,12 @@
                 ),
             ),
 
+     "fs" => array
+     (
+        "dir" => "",
+        "dirs" => array(),
+     ),
+
         // Object: Contact (can be aggregated to User)    
             "contactInfo" => array
             (

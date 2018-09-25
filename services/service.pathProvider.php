@@ -34,7 +34,7 @@ class pathProvider implements RETURN_CODE
    * $path - path in form of "x/y/z"
    */
   public
-  function buildPath()
+  function buildPath($subDirStruct = [])
   {
     $p = $this->_path;
     $dirArr = explode("/", $p);
@@ -52,6 +52,13 @@ class pathProvider implements RETURN_CODE
     // make dir path, if does not exist
     $this->_mkDir($dirPath);
 
+
+    /** 
+     * create sub-dir structure
+     */
+    if($subDirStruct) {
+        $this->__mkSubDirStruct($subDirStruct,$dirPath);
+    }
 
     /** 
      * create sub-dir structure

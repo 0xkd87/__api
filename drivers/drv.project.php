@@ -7,7 +7,6 @@
     include_once('./../services/service.sqlTable.php');
 
     include_once('./../services/service.pathProvider.php');
-    //  $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
 
     class drvPrj
     {
@@ -29,12 +28,17 @@
         function _initTables()
         {
             //Create a temporary object for function call
-            $this->_arrNode = (new PRJ())->getAttrNodeNamesAsArray(); //Node name array is populated
+            $p = new PRJ();
+            // $p->initDir();
+            $this->_arrNode = $p->getAttrNodeNamesAsArray(); //Node name array is populated
             $x = new sqlTable(self::TABLE_ACTIVE_PRJ);
             foreach ($this->_arrNode as $k => $v) 
             {
                 $x->addField( $v,$x::FIELDTYPE_SERIALIZED_OBJ);
             }
+            $x->addField( "fs",$x::FIELDTYPE_SERIALIZED_OBJ);
+
+
 
             $this->_dbDrv->initTable($x->getSqlString($x::OP_CREATE));
             
@@ -117,11 +121,22 @@
             if($postdata)
             {
                 $new = new PRJ(); //init a new OBJ
+
+                // file system operations - Create dir/folders and set path
+          
+
+
+
                 $new->jsonDecodeAttr($postdata,["prj","rev"],0); //safe
-            
+                $new->initDir();
+
+
                 $ser = array();
 
                 $sqlInsertStr = "INSERT INTO ". self::TABLE_ACTIVE_PRJ . " (";
+
+                $this->_arrNode = $new->getAttrNodeNamesAsArray();
+
                 foreach ($this->_arrNode as $k => $v) 
                 {
                     $ser[$v] = $new->serializeAttrNode($v);
@@ -142,12 +157,15 @@
                     }
                 }
                 $sqlInsertStr.= ");";
-
                 if($this->isInitialized())
                 {
                     $this->_dbDrv->dbExQuery($sqlInsertStr);
                 }
         
+
+
+                $pp = "projects/" . $new->get_DirName();
+                (new pathProvider($pp))->buildPath($new->get_subDirStruct());
                 //if query success
                 return $new->jsonEncodeAttr(0);
             }
@@ -165,7 +183,6 @@
             {
                 $new = new PRJ(); //init a new OBJ
                 $new->jsonDecodeAttr($postdata,["prj", "ident", "rev"],0); //safe
-                
                 $ser = array();
 
                 $sqlInsertStr = "UPDATE ". self::TABLE_ACTIVE_PRJ . " SET ";

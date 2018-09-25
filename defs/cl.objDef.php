@@ -40,7 +40,7 @@
         {
             return ($this->_Attr['ident']['idx']);
         }
-        private 
+        protected 
         function _newGUID($txt , $len = 40)
         {
             return substr(sha1($txt),0,$len);
@@ -153,6 +153,11 @@
         public 
         function serializeAttrNode($AttrNode = "")
         {
+            // if(!array_key_exists($AttrNode,$this->_Attr))
+            // {
+            //     return "";
+            // }
+
             if($AttrNode !== "")
             {
                 return serialize($this->_Attr[$AttrNode]);
