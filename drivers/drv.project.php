@@ -71,7 +71,7 @@
             return false;
         }
         public
-        function getActiveList(bool $getSorted = true)
+        function __r(bool $getSorted = true)
         {
             $row = array();
 
@@ -112,7 +112,7 @@
         }
 /* Adds a new UDT to the data base... */
         public
-        function addNew(
+        function __c(
             $TableName = self::TABLE_ACTIVE_PRJ // Table name where new object is to be inserted (Default = Active list)
             )
         {
@@ -176,7 +176,7 @@
          * Update / Modify the object posted by client
          */
         public
-        function update()
+        function __u()
         {
             $postdata = file_get_contents("php://input");
             if($postdata)
@@ -219,7 +219,7 @@
          * Delete it from the active list and move it to the obsolete list
          */
         public
-        function delete(bool $moveToObsolete = true)
+        function __d(bool $moveToObsolete = true)
         {
             $postdata = file_get_contents("php://input");
             if($postdata)

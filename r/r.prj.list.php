@@ -14,7 +14,7 @@
 
     $drv = new drvPrj();
 
-    echo $drv->getActiveList();
+    echo $drv->__r();
     exit;
 
 

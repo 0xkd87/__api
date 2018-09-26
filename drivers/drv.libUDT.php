@@ -71,7 +71,7 @@
             return false;
         }
         public
-        function getUDTList(bool $getSorted = true)
+        function __r(bool $getSorted = true)
         {
             $row = array();
 
@@ -112,7 +112,7 @@
         }
 /* Adds a new UDT to the data base... */
         public
-        function addNewUDT()
+        function __c()
         {
 
             $postdata = file_get_contents("php://input");
@@ -159,7 +159,7 @@
         }
 
         public
-        function updateUDT()
+        function __u()
         {
             $postdata = file_get_contents("php://input");
             if($postdata)
@@ -199,7 +199,7 @@
         }
 
         public
-        function deleteUDT()
+        function __d()
         {
             $postdata = file_get_contents("php://input");
             if($postdata)

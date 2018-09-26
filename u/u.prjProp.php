@@ -15,7 +15,7 @@
     $drv = new drvPrj();
     if($drv)
     {
-        echo $drv->update();
+        echo $drv->__u();
     }
     else{
         echo "error";

@@ -16,23 +16,23 @@
         switch ($_REQUEST["op"]) {
             case 'c':
                 if($drv) {
-                    echo $drv->addNewUDT();
+                    echo $drv->__c();
                 }
                 break;
             case 'u':
                 if($drv) {
-                    echo $drv->updateUDT();
+                    echo $drv->__u();
                 }
                 break;
             case 'd':
                 if($drv) {
-                    echo $drv->deleteUDT();
+                    echo $drv->__d();
                 }
                 break;
 
             case 'r':
                 if($drv) {
-                    echo $drv->getUDTList();
+                    echo $drv->__r();
                 }
                 break;
             
