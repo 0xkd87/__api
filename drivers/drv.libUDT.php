@@ -9,7 +9,6 @@
     include_once('./../services/service.sqlTable.php');
 
     include_once('./../services/service.pathProvider.php');
-    //  $DirPath_ROOT_LibUDT = (PATH__DATA_ROOT . DIRNAME__LIBUDT_ROOT);
 
     class drvLibUDT
     {
@@ -48,9 +47,9 @@
         }
 
         public
-        function __construct()
+        function __construct(string $dest = "lib/libUDT")
         {
-            $this->PATH = ((new pathProvider("lib/libUDT"))->buildPath());
+            $this->PATH = ((new pathProvider($dest))->buildPath());
 
             $this->_initDB();
             $this->_initTables();
