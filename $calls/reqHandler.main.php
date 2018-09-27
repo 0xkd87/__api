@@ -74,6 +74,5 @@
                 break;
         }
 
-
-    exit;
+    exit; // success exit END
 ?>
